@@ -13,3 +13,6 @@
 
 # Gradle
 .gradle
+
+# CMake
+build/
