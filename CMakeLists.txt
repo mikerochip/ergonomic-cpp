@@ -6,6 +6,9 @@ set(CMAKE_CXX_STANDARD 14)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
+
 add_executable(CMakeTest
   src/main.cpp
   src/MyApp/Foo.cpp)
@@ -13,4 +16,4 @@ add_executable(CMakeTest
 include_directories(lib)
 add_subdirectory(lib/MyLibrary)
 
-target_link_libraries(CMakeTest MyLibrary)
+target_link_libraries(CMakeTest MyLibrary ${CONAN_LIBS})
