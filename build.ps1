@@ -1,4 +1,4 @@
-set -x
+Set-PSDebug -Trace 1
 
 mkdir -p build
 cd build

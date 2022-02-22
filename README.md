@@ -22,9 +22,18 @@ Python is the hard part, this is easy. Just run:
 
 ```pip install conan```
 
+## PowerShell
+
+This is for running the build script. Definitely becoming a fan of powershell over bash scripts since it's cross-plat now!
+
+* Win: Nothing! It's built-in!
+* Mac: ```brew install --cask powershell```
+
 # Building
 
-All you have to do is run ```./build.sh```
+This will run conan and cmake commands before building.
+
+```pwsh build.ps1```
 
 # Running
 
