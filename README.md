@@ -1,3 +1,7 @@
+# Purpose
+
+This is a simple C++ app built with [CMake](https://cmake.org/) and [Conan](https://conan.io/). This is really just a test-bed for a more ergonomic C++ dev workflow.
+
 # Install Requirements
 
 ## Python
