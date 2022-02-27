@@ -1,7 +1,7 @@
 Set-PSDebug -Trace 1
 
-mkdir -p build
-cd build
+New-Item -Type Directory -Force build
+Set-Location build
 
 conan install .. --build=missing
 
