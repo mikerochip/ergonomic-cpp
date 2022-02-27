@@ -41,4 +41,4 @@ This will run conan and cmake commands before building.
 
 # Running
 
-```./build/bin/CMakeTest```
+```pwsh run.ps1```
