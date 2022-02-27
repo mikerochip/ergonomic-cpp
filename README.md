@@ -35,10 +35,12 @@ This is for running the build script. Definitely becoming a fan of powershell ov
 
 # Building
 
-This will run conan and cmake commands before building.
-
 ```pwsh build.ps1```
+
+This will run conan and cmake commands before building.
 
 # Running
 
 ```pwsh run.ps1```
+
+This will first run ```build.ps1``` if it doesn't find the build output directory.
