@@ -1,5 +1,6 @@
  [requires]
  poco/1.9.4
+ fmt/8.1.1
 
  [generators]
  cmake

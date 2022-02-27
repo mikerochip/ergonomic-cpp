@@ -1,9 +1,11 @@
-#include <iostream>
+#include <string>
+#include "fmt/core.h"
 #include "Poco/MD5Engine.h"
 #include "Poco/DigestStream.h"
 #include "MyApp/Foo.h"
 #include "MyLibrary/Foo.h"
 
+using namespace fmt;
 using namespace std;
 
 string GeneratePocoMd5Hex()
@@ -17,15 +19,15 @@ string GeneratePocoMd5Hex()
 
 int main(int argc, char** argv)
 {
-    cout << "Hello, World!" << endl;
+    print("Hello, World!\n");
 
     MyApp::Foo myAppFoo;
-    cout << "MyApp::Foo=" << myAppFoo.GenerateNumber() << endl;
+    print("MyApp::Foo={}\n", myAppFoo.GenerateNumber());
 
     MyLibrary::Foo myLibraryFoo;
-    cout << "MyLibrary::Foo=" << myLibraryFoo.GenerateNumber() << endl;
+    print("MyLibrary::Foo={}\n", myLibraryFoo.GenerateNumber());
 
     string md5Hex = GeneratePocoMd5Hex();
-    cout << "Poco::MD5::Hex=" << md5Hex << endl;
+    print("Poco::MD5::Hex={}\n", md5Hex);
     return 0;
 }
