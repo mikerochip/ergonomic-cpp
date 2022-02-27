@@ -33,14 +33,9 @@ This is for running the build script. Definitely becoming a fan of powershell ov
 * Win: Nothing! It's built-in!
 * Mac: ```brew install --cask powershell```
 
-# Building
+# Building and Running
 
-```pwsh build.ps1```
+```pwsh build.ps1 [Debug|Release]```
+```pwsh run.ps1 [Debug|Release]```
 
-This will run conan and cmake commands before building.
-
-# Running
-
-```pwsh run.ps1```
-
-This will first run ```build.ps1``` if it doesn't find the build output directory.
+The build script will run conan and cmake commands before building. The run script will invoke the build script if the build output dir doesn't exist.
