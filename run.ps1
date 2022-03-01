@@ -1,18 +1,17 @@
 param
 (
     [string]
-    $Configuration = "Debug"
+    $BuildType = "Debug"
 )
 
-# lower the configuration name for composing the dir name
-$ConfigDirName = $Configuration.ToLower()
-$BuildDir = "build-$ConfigDirName"
-$BinDir = "$PSScriptRoot/$BuildDir/bin"
+$BuildTypeLower = $BuildType.ToLower()
+$BuildPath = "build-$BuildTypeLower"
+$BinPath = "$PSScriptRoot/$BuildPath/bin"
 
 # this could probably be a more sophisticated check, but this works
-if ( -not (Test-Path -Path $BinDir) )
+if ( -not (Test-Path -Path $BinPath) )
 {
-    & $PSScriptRoot/build.ps1 $Configuration
+    & $PSScriptRoot/build.ps1 $BuildType
 }
-Set-Location $BinDir
+Set-Location $BinPath
 Start-Process -FilePath CMakeTest

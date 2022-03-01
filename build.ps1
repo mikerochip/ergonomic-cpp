@@ -1,25 +1,27 @@
 param
 (
     [string]
-    $Configuration = "Debug"
+    $BuildType = "Debug"
 )
 
 # enable echoing
 Set-PSDebug -Trace 1
 
-# sanitize and store the configuration name for different purposes:
-# 1. all lower for dir name
-# 2. Pascal case for build type name
-$ConfigDirName = $Configuration.ToLower()
-$TextInfo = (Get-Culture).TextInfo
-$ConfigTypeName = $TextInfo.ToTitleCase($ConfigDirName)
-$BuildDir = "build-$ConfigDirName"
+$BuildTypeLower = $BuildType.ToLower()
+$ConanConfigPath = "conan-config"
+$ConanProfilePath = "$ConanConfigPath/profiles/cmake-test-$BuildTypeLower"
+$BuildPath = "build-$BuildTypeLower"
+$CmakeBuildType = (Get-Culture).TextInfo.ToTitleCase($BuildTypeLower)
 
-# create and cd to the BuildDir
-New-Item -Type Directory -Force $BuildDir
-Set-Location $BuildDir
+# this isn't necessary, but helpful for setting up CLion
+Remove-Item -Force -Path "$ConanConfigPath/.DS_Store" -ErrorAction Ignore
+conan config install $ConanConfigPath
 
-conan install .. -s build_type=$ConfigTypeName --build=missing
+# create and cd to the BuildPath
+New-Item -Type Directory -Force $BuildPath
+Set-Location $BuildPath
+# it's easier to install from the BuildPath since we need to run cmake here
+conan install .. -pr="../$ConanProfilePath" -pr="default" --build=missing
 # the source dir is the parent since that's where CMakeLists.txt is
-cmake -DCMAKE_BUILD_TYPE=$ConfigTypeName -S .. -B .
+cmake -DCMAKE_BUILD_TYPE=$CmakeBuildType -S .. -B .
 make all

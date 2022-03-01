@@ -1,0 +1,9 @@
+[settings]
+build_type=Release
+
+[options]
+*:shared=True
+
+[build_requires]
+
+[env]
