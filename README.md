@@ -68,9 +68,10 @@ Scripts are in the ```src/BuildSystem``` folder
       2. Build directory: ```build/release```
 6. Open the Conan window
    1. Click the Match profile button
-      1. Set Debug to cmake-test-debug
-      2. Set Release to cmake-test-release
-   2. Click the Reload icon for both conan profiles
+      1. Set Debug to ```ergonomic-cpp-debug```
+      2. Set Release to ```ergonomic-cpp-release```
+   2. Click the Reload button
 7. Open the CMake window
-   1. Press the Reload icon
-8. When using CLion, you'll have to hit these reload buttons after pulling the project if dependencies change
+   1. Click the Reload button
+
+When using CLion, you'll have to hit the CMake and Conan reload buttons after pulling the project if dependencies change. Need to think about automating this! What a pain! It's like Unreal's ```GenerateProjectFiles```
