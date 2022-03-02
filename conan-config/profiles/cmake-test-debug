@@ -2,7 +2,6 @@
 build_type=Debug
 
 [options]
-*:shared=True
 
 [build_requires]
 
