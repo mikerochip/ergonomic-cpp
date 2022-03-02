@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
-project(CMakeTest)
+project(ErgonomicCpp)
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -16,10 +16,10 @@ include_directories(
 add_subdirectory(
   src/Libraries/MyLibrary
 )
-add_executable(CMakeTest
+add_executable(ErgonomicCpp
   src/App/main.cpp
   src/App/MyApp/Foo.cpp
 )
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-target_link_libraries(CMakeTest MyLibrary ${CONAN_LIBS})
+target_link_libraries(ErgonomicCpp MyLibrary ${CONAN_LIBS})

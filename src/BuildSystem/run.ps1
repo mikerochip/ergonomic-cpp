@@ -14,4 +14,4 @@ if ( -not (Test-Path -Path $BinPath) )
     & $PSScriptRoot/build.ps1 $BuildType
 }
 Set-Location $BinPath
-Start-Process -FilePath CMakeTest
+Start-Process -FilePath ErgonomicCpp

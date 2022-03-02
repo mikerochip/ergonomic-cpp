@@ -9,7 +9,7 @@ Set-PSDebug -Trace 1
 
 $BuildTypeLower = $BuildType.ToLower()
 $ConanConfigPath = "conan-config"
-$ConanProfilePath = "$ConanConfigPath/profiles/cmake-test-$BuildTypeLower"
+$ConanProfilePath = "$ConanConfigPath/profiles/ergonomic-cpp-$BuildTypeLower"
 $BuildPath = "build-$BuildTypeLower"
 $CmakeBuildType = (Get-Culture).TextInfo.ToTitleCase($BuildTypeLower)
 
