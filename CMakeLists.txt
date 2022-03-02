@@ -11,10 +11,10 @@ else()
 endif()
 
 include_directories(
-  src
+  src/Libraries
 )
 add_subdirectory(
-  src/MyLibrary
+  src/Libraries/MyLibrary
 )
 add_executable(CMakeTest
   src/App/main.cpp
