@@ -33,12 +33,11 @@ Python is the hard part, Conan is easy. Just run:
 
 ## PowerShell
 
-PowerShell 7.2 scripts are used for the BuildSystem.
+PowerShell 7.2 scripts are used for the BuildSystem. Definitely becoming a fan of PowerShell instead of Bash since it's cross-platform and supports M1 ARM as of 7.2!
 
-Definitely becoming a fan of PowerShell instead of Bash since it's cross-platform and supports M1 ARM as of 7.2!
-
-* Win: ```winget install --id Microsoft.Powershell --source winget```
+* Open a command prompt
 * Mac: ```brew install --cask powershell```
+* Win: ```winget install --id Microsoft.Powershell --source winget```
 
 # Building and Running
 
