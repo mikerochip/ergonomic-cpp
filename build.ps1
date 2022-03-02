@@ -13,7 +13,7 @@ $ConanProfilePath = "$ConanConfigPath/profiles/cmake-test-$BuildTypeLower"
 $BuildPath = "build-$BuildTypeLower"
 $CmakeBuildType = (Get-Culture).TextInfo.ToTitleCase($BuildTypeLower)
 
-# this isn't necessary, but helpful for setting up CLion
+# installing profiles isn't necessary, but helpful for setting up CLion
 Remove-Item -Force -Path "$ConanConfigPath/.DS_Store" -ErrorAction Ignore
 conan config install $ConanConfigPath
 
