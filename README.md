@@ -6,7 +6,7 @@ This is a simple C++ app built with [CMake](https://cmake.org/) and [Conan](http
 
 ## Python
 
-Managing Python installations is a massive pain. I used 3.10.2 for this project.
+Python is a dependency for Conan. Managing Python installations is a massive pain. I used 3.10.2 for this project.
 
 1. Install pyenv or pyenv-win
    * Mac: ```brew install pyenv```
@@ -22,18 +22,22 @@ Managing Python installations is a massive pain. I used 3.10.2 for this project.
 
 ## Conan
 
-Python is the hard part, this is easy. Just run:
+Python is the hard part, Conan is easy. Just run:
 
 ```pip install conan```
 
 ## PowerShell
 
-This is for running the build script. Definitely becoming a fan of powershell over bash scripts since it's cross-plat now!
+PowerShell scripts are used for the BuildSystem.
+
+Definitely becoming a fan of PowerShell instead of Bash since it's cross-platform now!
 
 * Win: Nothing! It's built-in!
 * Mac: ```brew install --cask powershell```
 
 # Building and Running
+
+Scripts are in the ```src/BuildSystem``` folder
 
 ## Command Line
 
@@ -43,9 +47,10 @@ This is for running the build script. Definitely becoming a fan of powershell ov
 
 ## CLion
 
-1. Open a command prompt at the project root and run these
-   1. ```pwsh build.ps1 Debug```
-   2. ```pwsh build.ps1 Release```
+1. Open a command prompt at the project root, then
+   1. ```cd src/BuildSystem```
+   2. ```pwsh build.ps1 Debug```
+   3. ```pwsh build.ps1 Release```
 2. Open CLion
 3. Install the plugin for [Conan](https://plugins.jetbrains.com/plugin/11956-conan)
 4. Preferences > Build, Execution, and Deployment > Conan
