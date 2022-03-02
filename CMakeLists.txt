@@ -3,6 +3,7 @@ project(ErgonomicCpp)
 
 set(CMAKE_CXX_STANDARD 14)
 
+# this check is needed for CLion to generate an error
 if(EXISTS ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
     include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
     conan_basic_setup()
