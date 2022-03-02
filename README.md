@@ -1,6 +1,10 @@
 # Purpose
 
-This is a simple C++ app built with [CMake](https://cmake.org/) and [Conan](https://conan.io/). This is really just a test-bed for a more ergonomic C++ dev workflow.
+This is a proof of concept for a more ergonomic dev workflow for cross-platform C++ apps using
+
+* [CMake](https://cmake.org/)
+* [Conan](https://conan.io/)
+* [PowerShell](https://github.com/PowerShell/PowerShell)
 
 # Install Requirements
 
@@ -28,11 +32,11 @@ Python is the hard part, Conan is easy. Just run:
 
 ## PowerShell
 
-PowerShell scripts are used for the BuildSystem.
+PowerShell 7.2 scripts are used for the BuildSystem.
 
-Definitely becoming a fan of PowerShell instead of Bash since it's cross-platform now!
+Definitely becoming a fan of PowerShell instead of Bash since it's cross-platform and supports M1 ARM as of 7.2!
 
-* Win: Nothing! It's built-in!
+* Win: ```winget install --id Microsoft.Powershell --source winget```
 * Mac: ```brew install --cask powershell```
 
 # Building and Running
