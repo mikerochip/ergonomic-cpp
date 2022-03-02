@@ -62,10 +62,10 @@ Scripts are in the ```src/BuildSystem``` folder
 5. Preferences > Build, Execution, and Deployment > CMake
    1. You should see a default configuration called Debug, select it and change these options
       1. Generator: Unix Makefiles
-      2. Build directory: ```build-debug```
+      2. Build directory: ```build/debug```
    2. Now click the plus icon to add a new configuration, which should default to Release
       1. Generator: Unix Makefiles
-      2. Build directory: ```build-release```
+      2. Build directory: ```build/release```
 6. Open the Conan window
    1. Click the Match profile button
       1. Set Debug to cmake-test-debug

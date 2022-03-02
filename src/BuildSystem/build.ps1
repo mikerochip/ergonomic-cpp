@@ -10,7 +10,7 @@ Set-PSDebug -Trace 1
 $BuildTypeLower = $BuildType.ToLower()
 $ConanConfigPath = "conan-config"
 $ConanProfilePath = "$ConanConfigPath/profiles/ergonomic-cpp-$BuildTypeLower"
-$BuildPath = "build-$BuildTypeLower"
+$BuildPath = "build/$BuildTypeLower"
 $CmakeBuildType = (Get-Culture).TextInfo.ToTitleCase($BuildTypeLower)
 
 # move to repo root
@@ -24,7 +24,7 @@ conan config install $ConanConfigPath
 New-Item -Type Directory -Force $BuildPath
 Set-Location $BuildPath
 # it's easier to install from the BuildPath since we need to run cmake here
-conan install .. -pr="../$ConanProfilePath" -pr="default" --build=missing
+conan install ../.. -pr="../../$ConanProfilePath" -pr="default" --build=missing
 # the source dir is the parent since that's where CMakeLists.txt is
-cmake -DCMAKE_BUILD_TYPE=$CmakeBuildType -S .. -B .
+cmake -DCMAKE_BUILD_TYPE=$CmakeBuildType -S ../.. -B .
 make all
