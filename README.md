@@ -49,9 +49,11 @@ PowerShell 7.2 scripts are used for the BuildSystem. Definitely becoming a fan o
 
 # Building and Running
 
-Scripts are in the ```src/BuildSystem``` folder
+Build and run scripts are in the ```src/BuildSystem``` folder
 
 ## Command Line
+
+First ```cd src/BuildSystem``` then run any of these:
 
 ```pwsh build.ps1 [Debug|Release]``` will run conan and cmake commands before building
 
