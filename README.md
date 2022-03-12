@@ -34,9 +34,10 @@ Python is a dependency for Conan. Managing Python installations is a massive pai
 
 ## Conan
 
-Python is the hard part, Conan is easy. Just run:
+Just one step, plus one more on Windows.
 
-```pip install conan```
+1. ```pip install conan```
+   * Win: run ```pyenv rehash```
 
 ## PowerShell
 
