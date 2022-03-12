@@ -9,6 +9,13 @@ This is a proof of concept for a more ergonomic cross-platform C++ dev workflow 
 
 # Install Requirements
 
+NOTE: A bunch of tools are going to be installed via command prompt and added to your PATH, so make sure to close and reopen all terminals between steps.
+
+## CMake
+
+* Mac: ```brew install cmake```
+* Win: ```winget install --id Kitware.CMake --source winget```
+
 ## Python
 
 Python is a dependency for Conan. Managing Python installations is a massive pain. I used 3.10.2 for this project.
