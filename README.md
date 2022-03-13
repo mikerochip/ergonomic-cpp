@@ -9,7 +9,28 @@ This is a proof of concept for a more ergonomic cross-platform C++ dev workflow 
 
 # Install Requirements
 
-NOTE: A bunch of tools are going to be installed via command prompt and added to your PATH, so make sure to close and reopen all terminals between steps.
+NOTE: Most tools (except MSVC for Windows) are going to be installed via command prompt and added to your PATH, so make sure to close and reopen all command prompts between steps.
+
+## Windows-specific Prerequisites
+
+1. Getting good defaults to work on Windows is a bit more complicated than Mac since it doesn't have built-in support for building C++ code
+1. The canonical C++ compiler on Windows is Microsoft Visual C++ aka MSVC
+1. You'll need to setup what's known as a "Developer Command Prompt" in order to access C++ tools from a CLI
+
+### Microsoft Visual C++
+
+1. Download the Visual Studio 2022 Build Tools installer with [this link](https://aka.ms/vs/17/release/vs_BuildTools.exe)
+1. Run the installer
+1. Check the Desktop development with C++ workload
+   * This is a giant download, just to warn you (~5gb)
+1. Click Install
+
+### Developer Command Prompt
+
+For C++ CLI development, it's highly recommended to setup a shortcut to a Developer command prompt. These steps will set you up with Developer PowerShell
+
+1. Open your Windows search box and type "Developer PowerShell"
+1. Right click the top result and choose Pin to Taskbar
 
 ## CMake
 
@@ -41,7 +62,7 @@ Just one step, plus one more on Windows.
 
 ## PowerShell
 
-PowerShell 7.2 scripts are used for the BuildSystem. Definitely becoming a fan of PowerShell instead of Bash since it's cross-platform and supports M1 ARM as of 7.2!
+PowerShell 7.2 scripts are used for the BuildSystem. Definitely becoming a fan of PowerShell instead of Bash/Bat since it's cross-platform and supports M1 ARM as of 7.2!
 
 * Open a command prompt
 * Mac: ```brew install --cask powershell```
