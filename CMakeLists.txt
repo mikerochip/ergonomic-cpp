@@ -17,7 +17,7 @@ include_directories(
 add_subdirectory(
   src/Libraries/MyLibrary
 )
-add_executable(ErgonomicCpp
+add_executable(${PROJECT_NAME}
   src/App/main.cpp
   src/App/MyApp/Foo.cpp
 )
