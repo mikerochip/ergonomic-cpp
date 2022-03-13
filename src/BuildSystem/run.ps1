@@ -7,6 +7,10 @@ param
 $BuildTypeLower = $BuildType.ToLower()
 $BuildPath = "build/$BuildTypeLower"
 $BinPath = "$PSScriptRoot/../../$BuildPath/bin"
+#FIXME Windows
+#$BuildPath = "build"
+#$CmakeBuildType = (Get-Culture).TextInfo.ToTitleCase($BuildTypeLower)
+#$BinPath = "$PSScriptRoot/../../$BuildPath/$CmakeBuildType"
 
 # this could probably be a more sophisticated check, but this works
 if ( -not (Test-Path -Path $BinPath) )
