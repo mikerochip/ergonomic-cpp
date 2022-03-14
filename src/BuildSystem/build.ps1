@@ -47,6 +47,6 @@ if ($IsWindows)
 }
 else
 {
-    cmake -D -S $ProjectPath -B . -G "Unix Makefiles"
+    cmake -S $ProjectPath -B . -G "Unix Makefiles"
     make all
 }
