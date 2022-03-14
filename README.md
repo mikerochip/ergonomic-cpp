@@ -64,10 +64,10 @@ Python is a dependency for Conan. Managing Python installations is a massive pai
 1. Install pyenv or pyenv-win
    * Mac: ```brew install pyenv```
    * Win: https://github.com/pyenv-win/pyenv-win#installation
-1. Install Python 3.10.2: 
-   * ```pyenv install 3.10.2```
-1. Set global Python version to 3.10.2
-   * ```pyenv global 3.10.2```
+1. Install Python 3.9.6: 
+   * ```pyenv install 3.9.6```
+1. Set global Python version to 3.9.6
+   * ```pyenv global 3.9.6```
 1. Upgrade pip
    * ```python -m pip install pip --upgrade```
 1. Install pipenv
@@ -90,13 +90,13 @@ PowerShell 7.2 scripts are used for the BuildSystem. Definitely becoming a fan o
 
 # Building and Running
 
-Build and run scripts are in the ```src/BuildSystem``` folder
+Build and run scripts are in ```src/BuildSystem```
 
 ## Command Line
 
 First ```cd src/BuildSystem``` then run any of these:
 
-```pwsh build.ps1 [Debug|Release]``` will run conan and cmake commands before building
+```pwsh build.ps1 [Debug|Release]``` will run conan and cmake commands before compiling
 
 ```pwsh run.ps1 [Debug|Release]``` will invoke the build script if the build output dir doesn't exist, then run the executable
 
