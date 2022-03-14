@@ -7,19 +7,22 @@ This is a proof of concept for a more ergonomic cross-platform C++ dev workflow 
 * [PowerShell](https://github.com/PowerShell/PowerShell) for build scripting
 * [fmt](https://github.com/fmtlib/fmt) string formatting
 
+# Windows-specific Warnings
+
+* Getting good defaults to work on Windows is a bit more complicated than Mac since it doesn't have a built-in C++ compiler
+* The canonical C++ compiler on Windows is Microsoft Visual C++ aka MSVC aka Visual Studio
+* You'll need to setup what's known as a "Developer Command Prompt" in order to access the MSVC tools from a command prompt
+* As of this writing (Mar 13 2022), Visual Studio 2022 (VS 17) doesn't work. The OpenSSL package (a dependency of POCO) doesn't have prebuilt binaries for VS 17. Building OpenSSL from source fails because its Conan recipe uses NMake, and there's a (Conan?) bug where it picks the x86 version of NMake even when the target arch is x86_64.
+
 # Install Requirements
 
 NOTE: Most tools (except MSVC for Windows) are going to be installed via command prompt and added to your PATH, so make sure to close and reopen all command prompts between steps.
 
-## Windows-specific Prerequisites
+## Windows Prerequisites
 
-1. Getting good defaults to work on Windows is a bit more complicated than Mac since it doesn't have built-in support for building C++ code
-1. The canonical C++ compiler on Windows is Microsoft Visual C++ aka MSVC
-1. You'll need to setup what's known as a "Developer Command Prompt" in order to access C++ tools from a CLI
+### Visual Studio 2019 (MSVC 16)
 
-### Microsoft Visual C++
-
-1. Download the Visual Studio 2022 Build Tools installer with [this link](https://aka.ms/vs/17/release/vs_BuildTools.exe)
+1. Download the Visual Studio 2019 Build Tools installer with [this link](https://aka.ms/vs/16/release/vs_BuildTools.exe)
 1. Run the installer
 1. Check the Desktop development with C++ workload
    * This is a giant download, just to warn you (~5gb)
@@ -27,10 +30,13 @@ NOTE: Most tools (except MSVC for Windows) are going to be installed via command
 
 ### Developer Command Prompt
 
-For C++ CLI development, it's highly recommended to setup a shortcut to a Developer command prompt. These steps will set you up with Developer PowerShell
+You'll need to use a Developer command prompt to invoke MSVC tools. These steps will setup a shortcut to Developer PowerShell for VS 2019.
 
 1. Open your Windows search box and type "Developer PowerShell"
-1. Right click the top result and choose Pin to Taskbar
+1. Right click the "Developer PowerShell for VS 2019" result and choose Pin to Taskbar
+1. Use this command prompt in all subsequent steps
+
+**NOTE: Use this command prompt when working with this project**
 
 ## CMake
 

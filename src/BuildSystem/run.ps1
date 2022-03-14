@@ -4,16 +4,24 @@ param
     $BuildType = "Debug"
 )
 
+$ProjectPath = "$PSScriptRoot/../.."
+
+# sanitize the build type string
 $BuildTypeLower = $BuildType.ToLower()
-$BuildPath = "build/$BuildTypeLower"
-$BinPath = "$PSScriptRoot/../../$BuildPath/bin"
-#FIXME Windows
-#$BuildPath = "build"
-#$CmakeBuildType = (Get-Culture).TextInfo.ToTitleCase($BuildTypeLower)
-#$BinPath = "$PSScriptRoot/../../$BuildPath/$CmakeBuildType"
+$BuildType = (Get-Culture).TextInfo.ToTitleCase($BuildTypeLower)
+
+if ($IsWindows)
+{
+    $BuildPath = "$ProjectPath/build"
+}
+else
+{
+    $BuildPath = "$ProjectPath/build/$BuildTypeLower"
+}
+$BinPath = "$BuildPath/bin"
 
 # this could probably be a more sophisticated check, but this works
-if ( -not (Test-Path -Path $BinPath) )
+if (-not (Test-Path -Path $BinPath))
 {
     & $PSScriptRoot/build.ps1 $BuildType
 }
