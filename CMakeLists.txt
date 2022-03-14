@@ -23,4 +23,4 @@ add_executable(${PROJECT_NAME}
 )
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-target_link_libraries(ErgonomicCpp MyLibrary ${CONAN_LIBS})
+target_link_libraries(${PROJECT_NAME} MyLibrary ${CONAN_LIBS})
