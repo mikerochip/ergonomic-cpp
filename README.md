@@ -7,6 +7,11 @@ This is a proof of concept for a more ergonomic cross-platform C++ dev workflow 
 * [PowerShell](https://github.com/PowerShell/PowerShell) for build scripting
 * [fmt](https://github.com/fmtlib/fmt) string formatting
 
+With the following compilers / build systems
+
+* Windows: Visual Studio 2019 (MSVC 16) / MSBuild
+* Mac: GCC ?? / Unix Makefiles
+
 # Windows-specific Warnings
 
 * Getting good defaults to work on Windows is a bit more complicated than Mac since it doesn't have a built-in C++ compiler
