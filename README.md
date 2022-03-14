@@ -35,11 +35,10 @@ NOTE: Most tools (except MSVC for Windows) are going to be installed via command
 
 ### Developer Command Prompt
 
-You'll need to use a Developer command prompt to invoke MSVC tools. These steps will setup a shortcut to Developer PowerShell for VS 2019.
+You'll need to use a Developer command prompt to invoke MSVC tools
 
 1. Open your Windows search box and type "Developer PowerShell"
 1. Right click the "Developer PowerShell for VS 2019" result and choose Pin to Taskbar
-1. Use this command prompt in all subsequent steps
 
 **NOTE: Use this command prompt when working with this project**
 
