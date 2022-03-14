@@ -12,10 +12,14 @@ if ($IsWindows)
 {
     $ConanConfigPath = "$ProjectPath/conan-config/Windows"
 }
+elseif ($IsMacOS)
+{
+    $ConanConfigPath = "$ProjectPath/conan-config/Mac"
+    Remove-Item -Force -Path "$ConanConfigPath/.DS_Store" -ErrorAction Ignore
+}
 else
 {
     $ConanConfigPath = "$ProjectPath/conan-config/Default"
-    Remove-Item -Force -Path "$ConanConfigPath/.DS_Store" -ErrorAction Ignore
 }
 conan config install $ConanConfigPath
 

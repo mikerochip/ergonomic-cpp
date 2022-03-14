@@ -9,21 +9,31 @@ This is a proof of concept for a more ergonomic cross-platform C++ dev workflow 
 
 With the following compilers / build systems
 
+* Mac: Apple Clang / Unix Makefiles
 * Windows: Visual Studio 2019 (MSVC 16) / MSBuild
-* Mac: GCC ?? / Unix Makefiles
-
-# Windows-specific Warnings
-
-* Getting good defaults to work on Windows is a bit more complicated than Mac since it doesn't have a built-in C++ compiler
-* The canonical C++ compiler on Windows is Microsoft Visual C++ aka MSVC aka Visual Studio
-* You'll need to setup what's known as a "Developer Command Prompt" in order to access the MSVC tools from a command prompt
-* As of this writing (Mar 13 2022), Visual Studio 2022 (VS 17) doesn't work. The OpenSSL package (a dependency of POCO) doesn't have prebuilt binaries for VS 17. Building OpenSSL from source fails because its Conan recipe uses NMake, and there's a (Conan?) bug where it picks the x86 version of NMake even when the target arch is x86_64.
 
 # Install Requirements
 
-NOTE: Most tools (except MSVC for Windows) are going to be installed via command prompt and added to your PATH, so make sure to close and reopen all command prompts between steps.
+NOTE: Most tools (except MSVC on Windows) are going to be installed via command prompt and added to your PATH, so make sure to close and reopen all command prompts between steps.
+
+## Mac Prerequisites
+
+### C++ Compilers and CLI Tools
+
+1. Open a terminal
+1. Run ```xcode-select --install```
+
+### Homebrew
+
+1. Go to https://brew.sh/
+1. Follow the install instructions
 
 ## Windows Prerequisites
+
+### Warnings
+
+* You can't open just any command prompt to access C++ tools with MSVC. You'll need to open a "Developer Command Prompt" instead.
+* As of this writing (Mar 13 2022), Visual Studio 2022 (VS 17) doesn't work. The OpenSSL package (a dependency of POCO) doesn't have prebuilt binaries for VS 17. Building OpenSSL from source fails because its Conan recipe uses NMake, and there's a (Conan?) bug where it picks the x86 version of NMake even when the target arch is x86_64.
 
 ### Visual Studio 2019 (MSVC 16)
 
@@ -35,7 +45,7 @@ NOTE: Most tools (except MSVC for Windows) are going to be installed via command
 
 ### Developer Command Prompt
 
-You'll need to use a Developer command prompt to invoke MSVC tools
+You'll need to use a Developer command prompt to access MSVC tools
 
 1. Open your Windows search box and type "Developer PowerShell"
 1. Right click the "Developer PowerShell for VS 2019" result and choose Pin to Taskbar
