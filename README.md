@@ -100,7 +100,7 @@ First ```cd src/BuildSystem``` then run any of these:
 2. Open CLion
 3. Install the plugin for [Conan](https://plugins.jetbrains.com/plugin/11956-conan)
 4. Preferences > Build, Execution, and Deployment > Conan
-   1. Install args: ```-pr=default --build=missing```
+   1. Install args: ```--build=missing```
 5. Preferences > Build, Execution, and Deployment > CMake
    1. You should see a default configuration called Debug, select it and change these options
       1. Generator: Unix Makefiles
