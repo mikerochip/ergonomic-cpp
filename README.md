@@ -59,7 +59,7 @@ You'll need to use a Developer command prompt to access MSVC tools
 
 ## Python
 
-Python is a dependency for Conan. Managing Python installations is a massive pain. I used 3.10.2 for this project.
+Python is a dependency for Conan. Managing Python installations is a massive pain, but we're going to do it right (i.e. version pinning) rather than implicitly depending on whatever the system Python happens to be.
 
 1. Install pyenv or pyenv-win
    * Mac: ```brew install pyenv```
