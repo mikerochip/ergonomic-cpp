@@ -75,10 +75,14 @@ Python is a dependency for Conan. Managing Python installations is a massive pai
 
 ## Conan
 
-Just one step, plus one more on Windows.
+To install
 
 1. ```pip install conan```
-   * Win: run ```pyenv rehash```
+2. ```pyenv rehash```
+
+To update
+
+```pip install conan --upgrade```
 
 ## PowerShell
 
@@ -134,3 +138,20 @@ First ```cd src/BuildSystem``` then run any of these:
    1. Click the Reload button
 
 When using CLion, you'll have to hit the CMake and Conan reload buttons after pulling the project if dependencies change. Need to think about automating this! What a pain! It's like Unreal's ```GenerateProjectFiles```
+
+# Troubleshooting
+
+**Error:** When running the build script ```CMake Error at build/debug/conanbuildinfo.cmake:1299 (message): Detected a mismatch for the compiler version between your conan profile settings and CMake```
+
+**Suggestion:** Generally, your compiler changing (install, update, etc) will cause this error. This project relies on the CMake and Conan compiler defaults being the same.
+
+Run this:
+
+1. ```pip install conan --upgrade```
+2. ```conan profile new default --detect --force```
+
+Then re-run the build script.
+
+**Error:** ```ERROR: Invalid setting 'x.x' is not a valid 'settings.compiler.version' value.```
+
+**Suggestion:** If you're on Mac and you get this error then probably Conan itself hasn't been updated to support the latest compiler version from the XCode CLI tools, which presumably you just downloaded. The workaround for this, which admittedly sucks pretty bad, is to add the new version to your ```~/.conan/settings.yml``` manually in the ```apple-clang/version``` array.
