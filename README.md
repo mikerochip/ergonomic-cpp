@@ -30,11 +30,6 @@ NOTE: Most tools (except MSVC on Windows) are going to be installed via command 
 
 ## Windows Prerequisites
 
-### Warnings
-
-* You can't open just any command prompt to access C++ tools with MSVC. You'll need to open a "Developer Command Prompt" instead.
-* As of this writing (Mar 13 2022), Visual Studio 2022 (VS 17) doesn't work. The OpenSSL package (a dependency of POCO) doesn't have prebuilt binaries for VS 17. Building OpenSSL from source fails because its Conan recipe uses NMake, and there's a (Conan?) bug where it picks the x86 version of NMake even when the target arch is x86_64.
-
 ### Visual Studio 2019 (MSVC 16)
 
 1. Download the Visual Studio 2019 Build Tools installer with [this link](https://aka.ms/vs/16/release/vs_BuildTools.exe)
@@ -51,6 +46,11 @@ You'll need to use a Developer command prompt to access MSVC tools
 1. Right click the "Developer PowerShell for VS 2019" result and choose Pin to Taskbar
 
 **NOTE: Use this command prompt when working with this project**
+
+### ⚠ Warning ⚠
+
+* You can't open just any command prompt to access MSVC's C++ tools. You need a Developer Command Prompt for the specific version of VS you install. The reason for this is that a bunch of env vars are added to the command prompt on launch, and the vars are specific to each MSVC version, so they'd be absent or have version conflicts otherwise.
+* As of this writing (Mar 13 2022), Visual Studio 2022 (VS 17) doesn't work. A dependency of POCO, OpenSSL (specifically openssl/1.1.1l) doesn't have prebuilt binaries for VS 17, and building it from source fails because: (A) its Conan recipe uses NMake and (B) there's a (Conan?) bug where it picks the x86 version of NMake even though the target arch is x86_64.
 
 ## CMake
 
