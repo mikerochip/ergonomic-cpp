@@ -20,6 +20,7 @@ NOTE: Most tools (except MSVC on Windows) are going to be installed via command 
 
 ### C++ Compilers and CLI Tools
 
+1. Download Xcode from the Mac App Store
 1. Open a terminal
 1. Run ```xcode-select --install```
 
