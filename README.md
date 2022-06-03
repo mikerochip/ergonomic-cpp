@@ -56,7 +56,7 @@ You'll need to use a Developer command prompt to access MSVC tools
 ## CMake
 
 * Mac: ```brew install cmake```
-* Win: ```winget install --id Kitware.CMake --source winget```
+* Win: ```winget install cmake```
 
 ## Python
 
