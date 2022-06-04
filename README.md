@@ -76,14 +76,10 @@ Python is a dependency for Conan. Managing Python installations is a massive pai
 
 ## Conan
 
-To install
+To install **or update**
 
-1. ```pip install conan```
+1. ```pip install conan --upgrade```
 2. ```pyenv rehash```
-
-To update
-
-```pip install conan --upgrade```
 
 ## PowerShell
 
