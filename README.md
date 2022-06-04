@@ -118,14 +118,14 @@ First ```cd src/BuildSystem``` then run any of these:
          * Build directory: ```build/debug```
       * Windows
          * Generator: Visual Studio 16 2019
-         * Build directory: ```build```
+         * Build directory: ```build/debug```
    1. Now click the plus icon to add a new configuration, which should default to Release
       * Mac
          * Generator: Unix Makefiles
          * Build directory: ```build/release```
       * Windows
          * Generator: Visual Studio 16 2019
-         * Build directory: ```build```
+         * Build directory: ```build/release```
 1. Open the Conan window
    1. Click the Match profile button
       1. Set Debug to ```ergonomic-cpp-debug```
