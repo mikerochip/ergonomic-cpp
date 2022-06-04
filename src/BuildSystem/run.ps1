@@ -9,15 +9,7 @@ $ProjectPath = "$PSScriptRoot/../.."
 # sanitize the build type string
 $BuildTypeLower = $BuildType.ToLower()
 $BuildType = (Get-Culture).TextInfo.ToTitleCase($BuildTypeLower)
-
-if ($IsWindows)
-{
-    $BuildPath = "$ProjectPath/build"
-}
-else
-{
-    $BuildPath = "$ProjectPath/build/$BuildTypeLower"
-}
+$BuildPath = "$ProjectPath/build/$BuildTypeLower"
 $BinPath = "$BuildPath/bin"
 
 # this could probably be a more sophisticated check, but this works

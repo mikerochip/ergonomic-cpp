@@ -26,14 +26,7 @@ conan config install $ConanConfigPath
 # create and cd to the BuildPath since we need to run conan install and cmake there
 $BuildTypeLower = $BuildType.ToLower()
 $BuildType = (Get-Culture).TextInfo.ToTitleCase($BuildTypeLower)
-if ($IsWindows)
-{
-    $BuildPath = "$ProjectPath/build"
-}
-else
-{
-    $BuildPath = "$ProjectPath/build/$BuildTypeLower"
-}
+$BuildPath = "$ProjectPath/build/$BuildTypeLower"
 New-Item -Type Directory -Force $BuildPath
 Set-Location $BuildPath
 
