@@ -109,27 +109,23 @@ First ```cd src/BuildSystem``` then run any of these:
    1. ```pwsh build.ps1 Release```
 1. Open CLion
 1. Install the plugin for [Conan](https://plugins.jetbrains.com/plugin/11956-conan)
-1. Preferences > Build, Execution, and Deployment > Conan
-   1. Install args: ```--build=missing```
-1. Preferences > Build, Execution, and Deployment > CMake
-   1. You should see a default configuration called Debug, select it and change these options
-      * Mac
-         * Generator: Unix Makefiles
+1. Preferences/Settings > Build, Execution, and Deployment
+   1. Conan
+      1. Install args: ```--build=missing```
+      1. [Windows] Conan executable: ```C:/Users/<yourusername>/.pyenv/pyenv-win/shims/conan.bat```
+   1. CMake
+      1. You should see a default configuration called ```Debug```, select it and change these options
          * Build directory: ```build/debug```
-      * Windows
-         * Generator: Visual Studio 16 2019
+         * [Mac] Generator: ```Unix Makefiles```
+         * [Windows] Generator: ```Visual Studio 16 2019```
+      1. Now click the plus icon to add a new configuration, which should default to ```Release```
          * Build directory: ```build/debug```
-   1. Now click the plus icon to add a new configuration, which should default to Release
-      * Mac
-         * Generator: Unix Makefiles
-         * Build directory: ```build/release```
-      * Windows
-         * Generator: Visual Studio 16 2019
-         * Build directory: ```build/release```
+         * [Mac] Generator: ```Unix Makefiles```
+         * [Windows] Generator: ```Visual Studio 16 2019```
 1. Open the Conan window
    1. Click the Match profile button
-      1. Set Debug to ```ergonomic-cpp-debug```
-      1. Set Release to ```ergonomic-cpp-release```
+      1. Set ```Debug``` to ```ergonomic-cpp-debug```
+      1. Set ```Release``` to ```ergonomic-cpp-release```
    1. Click the Reload button
 1. Open the CMake window
    1. Click the Reload button
