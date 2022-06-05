@@ -1,11 +1,12 @@
 # Purpose
 
-This is a proof of concept for a more ergonomic cross-platform C++ dev workflow using
+This is a proof of concept for a more ergonomic, cross-platform C++ dev workflow using
 
 * [CMake](https://cmake.org/) build system generator
 * [Conan](https://conan.io/) package manager
 * [PowerShell](https://github.com/PowerShell/PowerShell) for build scripting
-* [fmt](https://github.com/fmtlib/fmt) string formatting
+* [fmt](https://github.com/fmtlib/fmt) for string formatting
+* [CLion](https://www.jetbrains.com/clion/) as the default IDE
 
 With the following compilers / build systems
 
