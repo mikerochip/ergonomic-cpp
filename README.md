@@ -16,9 +16,9 @@ With the following compilers / build systems
 
 *NOTE: Most tools (except MSVC on Windows) are going to be installed via command prompt and added to your PATH, so make sure to close and reopen all command prompts between steps.*
 
-## Mac Prerequisites
+## Mac C++ Tools
 
-### C++ Compilers and CLI Tools
+### Xcode
 
 1. Download Xcode from the Mac App Store
 1. Open a terminal
@@ -31,7 +31,7 @@ With the following compilers / build systems
 
 *NOTE: Homebrew will install Xcode CLI tools these days, but that's not a guarantee*
 
-## Windows Prerequisites
+## Windows C++ Tools
 
 ### Visual Studio 2019 (MSVC 16)
 
@@ -86,7 +86,9 @@ Install Conan 1.49.0
 
 ## PowerShell
 
-PowerShell 7.2 scripts are used for the BuildSystem. Definitely becoming a fan of PowerShell instead of Bash/Bat since it's cross-platform and supports M1 ARM as of 7.2!
+PowerShell 7.2 scripts are used for the BuildSystem
+
+The latest PowerShell is cross-platform and supports M1 ARM as of 7.2! Definitely becoming a fan of PowerShell instead of Bash or Bat, despite the extra install step.
 
 * Open a command prompt
 * Mac: ```brew install --cask powershell```
@@ -95,6 +97,10 @@ PowerShell 7.2 scripts are used for the BuildSystem. Definitely becoming a fan o
 # Building and Running
 
 Build and run scripts are in ```src/BuildSystem```
+
+You pass the configuration as the first arg e.g. ```pwsh build.ps1 Debug``` or ```pwsh run.ps1 Release```
+
+Default configuration is ```Debug```
 
 ## Command Line
 
