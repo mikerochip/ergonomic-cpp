@@ -113,6 +113,7 @@ First ```cd src/BuildSystem``` then run any of these:
    1. Conan
       1. Install args: ```--build=missing```
       1. [Windows] Conan executable: ```C:/Users/<yourusername>/.pyenv/pyenv-win/shims/conan.bat```
+         * *There seems to be a CLion bug where it can't find ```conan``` in the path even if it's there.*
    1. CMake
       1. You should see a default configuration called ```Debug```, select it and change these options
          * Build directory: ```build/debug```
