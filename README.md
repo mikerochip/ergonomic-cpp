@@ -14,7 +14,7 @@ With the following compilers / build systems
 
 # Install Requirements
 
-NOTE: Most tools (except MSVC on Windows) are going to be installed via command prompt and added to your PATH, so make sure to close and reopen all command prompts between steps.
+*NOTE: Most tools (except MSVC on Windows) are going to be installed via command prompt and added to your PATH, so make sure to close and reopen all command prompts between steps.*
 
 ## Mac Prerequisites
 
@@ -29,6 +29,8 @@ NOTE: Most tools (except MSVC on Windows) are going to be installed via command 
 1. Go to https://brew.sh/
 1. Follow the install instructions
 
+*NOTE: Homebrew will install Xcode CLI tools these days, but that's not a guarantee*
+
 ## Windows Prerequisites
 
 ### Visual Studio 2019 (MSVC 16)
@@ -41,15 +43,13 @@ NOTE: Most tools (except MSVC on Windows) are going to be installed via command 
 
 ### Developer Command Prompt
 
-You'll need to use a Developer command prompt to access MSVC tools
-
 1. Open your Windows search box and type "Developer PowerShell"
-1. Right click the "Developer PowerShell for VS 2019" result and choose Pin to Taskbar
+1. Right click the "Developer PowerShell for VS 2019" result
+1. Choose Pin to Taskbar
 
-**NOTE: Use this command prompt when working with this project**
+### ⚠ **Warning** ⚠
 
-### ⚠ Warning ⚠
-
+* **You need to use a Developer Command Prompt when working with this project**
 * You can't open just any command prompt to access MSVC's C++ tools. You need a Developer Command Prompt for the specific version of VS you install. The reason for this is that a bunch of env vars are added to the command prompt on launch, and the vars are specific to each MSVC version, so they'd be absent or have version conflicts otherwise.
 * As of this writing (Mar 13 2022), Visual Studio 2022 (VS 17) doesn't work. A dependency of POCO, OpenSSL (specifically openssl/1.1.1l) doesn't have prebuilt binaries for VS 17, and building it from source fails because: (A) its Conan recipe uses NMake and (B) there's a (Conan?) bug where it picks the x86 version of NMake even though the target arch is x86_64.
 
@@ -60,18 +60,21 @@ You'll need to use a Developer command prompt to access MSVC tools
 
 ## Python
 
-Python is a dependency for Conan. Managing Python installations is a massive pain, but we're going to do it right (i.e. version pinning) rather than implicitly depending on whatever the system Python happens to be.
+Python is a dependency for Conan
 
-1. Install pyenv or pyenv-win
+The goal is to install Python 3.9.6, however...
+
+Managing Python installations is a massive pain. We're going to do it right (i.e. version pinning) rather than depending on whatever Python version happens to be installed on your system.
+
+1. First install pyenv, which will manage Python versions
    * Mac: ```brew install pyenv```
    * Win: https://github.com/pyenv-win/pyenv-win#installation
-1. Install Python 3.9.6: 
-   * ```pyenv install 3.9.6```
-1. Set global Python version to 3.9.6
-   * ```pyenv global 3.9.6```
-1. Upgrade pip
-   * ```python -m pip install pip --upgrade```
-1. Install pipenv
+      * PowerShell is the easiest install option
+1. Now open a command prompt to install Python via pyenv
+1. ```pyenv install 3.9.6```
+1. ```pyenv global 3.9.6```
+1. ```python -m pip install pip --upgrade```
+1. This isn't stricly needed, but you might as well install Pipenv. If you ever plan on working on Python projects, you'll want to use Pipenv to version-lock Python and packages.
    * ```python -m pip install --user pipenv```
 
 ## Conan
