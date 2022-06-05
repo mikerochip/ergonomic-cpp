@@ -149,3 +149,11 @@ Then re-run the build script.
 **Error:** ```ERROR: Invalid setting 'x.x' is not a valid 'settings.compiler.version' value.```
 
 **Suggestion:** If you're on Mac and you get this error then probably Conan itself hasn't been updated to support the latest compiler version from the XCode CLI tools, which presumably you just downloaded. The workaround for this, which admittedly sucks pretty bad, is to add the new version to your ```~/.conan/settings.yml``` manually in the ```apple-clang/version``` array.
+
+**Error:** [Windows] CLion syntax highlighting is broken (can't find standard library headers, incorrect warnings for Conan package includes, etc) and debugging doesn't work.
+
+**Suggestion:** Most likely your default toolchain is set to MinGW, which seems to be straight up broke on Windows. Setting it to Visual Studio should fix this.
+
+1. File > Settings > Build, Execution, and Deployment > Toolchains
+1. Click Visual Studio
+1. Click the up arrow button until Visual Studio becomes the first, default item
