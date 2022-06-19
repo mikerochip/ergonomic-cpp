@@ -30,10 +30,10 @@ int main(int argc, char** argv)
 
     CLI::App app;
     BuildCommandParser(app);
-    CLI11_PARSE(app, argc, argv);
+    CLI11_PARSE(app, argc, argv)
 
     auto&& options = app.get_options();
-    print("Options={}\n", options.size());
+    print("CLI::App::Options={}\n", options.size());
     for (auto&& option : options)
         print("{}\n", option->get_name());
     return 0;
