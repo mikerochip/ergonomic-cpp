@@ -66,7 +66,8 @@ The goal is to install Python 3.9.6, however...
 Managing Python installations is a massive pain. We're going to do it right (i.e. version pinning) rather than depending on whatever Python version happens to be installed on your system.
 
 1. First install pyenv, which will manage Python versions
-   * Mac: ```brew install pyenv```
+   * Mac: https://github.com/pyenv/pyenv#homebrew-in-macos
+      * Follow the ```For Zsh``` instructions for most modern Macs
    * Win: https://github.com/pyenv-win/pyenv-win#installation
       * PowerShell is the easiest install option
 1. Now open a command prompt to install Python via pyenv
