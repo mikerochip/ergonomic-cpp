@@ -90,7 +90,7 @@ PowerShell 7.2 scripts are used for the BuildSystem
 The latest PowerShell is cross-platform and supports M1 ARM as of 7.2! Definitely becoming a fan of PowerShell instead of Bash or Bat, despite the extra install step.
 
 * Open a command prompt
-* Mac: ```brew install --cask powershell```
+* Mac: ```brew install powershell```
 * Win: ```winget install --id Microsoft.Powershell --source winget```
 
 # Building and Running
