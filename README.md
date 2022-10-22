@@ -67,7 +67,8 @@ Managing Python installations is a massive pain. We're going to do it right (i.e
 
 1. First install pyenv, which will manage Python versions
    * Mac: https://github.com/pyenv/pyenv#homebrew-in-macos
-      * Follow the ```For Zsh``` instructions for most modern Macs
+      * Make sure your OS is Catalina or higher
+      * Follow the ```For Zsh``` instructions
    * Win: https://github.com/pyenv-win/pyenv-win#installation
       * PowerShell is the easiest install option
 1. Now open a command prompt to install Python via pyenv
