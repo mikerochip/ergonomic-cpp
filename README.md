@@ -19,18 +19,16 @@ With the following compilers / build systems
 
 ## Mac C++ Tools
 
-### Xcode
-
-1. Download Xcode from the Mac App Store
-1. Open a terminal
-1. Run ```xcode-select --install```
-
 ### Homebrew
 
 1. Go to https://brew.sh/
 1. Follow the install instructions
 
 *NOTE: Homebrew will install Xcode CLI tools these days, but that's not a guarantee*
+
+### Xcode
+
+[Download Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12) from the Mac App Store
 
 ## Windows C++ Tools
 
