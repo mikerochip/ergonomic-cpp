@@ -103,7 +103,7 @@ You pass the configuration as the first arg e.g. ```pwsh build.ps1 Debug``` or `
 
 Default configuration is ```Debug```
 
-## Command Line
+## From a Command Prompt
 
 First ```cd src/BuildSystem``` then run any of these:
 
@@ -111,9 +111,10 @@ First ```cd src/BuildSystem``` then run any of these:
 
 ```pwsh run.ps1 [Debug|Release]``` will invoke the build script if the build output dir doesn't exist, then run the executable
 
-## CLion
+## From CLion
 
-1. Open a command prompt at the project root, then
+1. You'll need to run the build scripts in Debug and Release first
+   1. Open a command prompt at the project root, then...
    1. ```cd src/BuildSystem```
    1. ```pwsh build.ps1 Debug```
    1. ```pwsh build.ps1 Release```
