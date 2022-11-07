@@ -50,7 +50,7 @@ With the following compilers / build systems
 
 * **You need to use a Developer Command Prompt when working with this project**
 * You can't open just any command prompt to access MSVC's C++ tools. You need a Developer Command Prompt for the specific version of VS you install. The reason for this is that a bunch of env vars are added to the command prompt on launch, and the vars are specific to each MSVC version, so they'd be absent or have version conflicts otherwise.
-* As of this writing (Mar 13 2022), Visual Studio 2022 (VS 17) doesn't work. A dependency of POCO, OpenSSL (specifically openssl/1.1.1l) doesn't have prebuilt binaries for VS 17, and building it from source fails because: (A) its Conan recipe uses NMake and (B) there's a (Conan?) bug where it picks the x86 version of NMake even though the target arch is x86_64.
+* As of this writing (Mar 13 2022), Visual Studio 2022 (MSVC 17) doesn't work. A dependency of POCO, OpenSSL (specifically openssl/1.1.1l) doesn't have prebuilt binaries for MSVC 17, and building it from source fails because: (A) its Conan recipe uses NMake and (B) there's a (Conan?) bug where it picks the x86 version of NMake even though the target arch is x86_64.
 
 ## CMake
 
@@ -130,7 +130,7 @@ First ```cd src/BuildSystem``` then run any of these:
          * [Mac] Generator: ```Unix Makefiles```
          * [Windows] Generator: ```Visual Studio 16 2019```
       1. Now click the plus icon to add a new configuration, which should default to ```Release```
-         * Build directory: ```build/debug```
+         * Build directory: ```build/release```
          * [Mac] Generator: ```Unix Makefiles```
          * [Windows] Generator: ```Visual Studio 16 2019```
 1. Open the Conan window
