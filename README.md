@@ -5,8 +5,9 @@ This is a proof of concept for a more ergonomic, cross-platform C++ dev workflow
 * [CMake](https://cmake.org/) build system generator
 * [Conan](https://conan.io/) package manager
 * [PowerShell](https://github.com/PowerShell/PowerShell) for build scripting
-* [fmt](https://github.com/fmtlib/fmt) for string formatting
 * [CLion](https://www.jetbrains.com/clion/) as the default IDE
+* [fmt](https://github.com/fmtlib/fmt) for string formatting
+* [CLI11](https://github.com/CLIUtils/CLI11) for command line parsing
 
 With the following compilers / build systems
 
