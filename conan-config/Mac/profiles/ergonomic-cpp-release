@@ -1,8 +1,10 @@
 include(default)
 
 [settings]
-compiler=apple-clang
 build_type=Release
+compiler=apple-clang
+compiler.version=13
+compiler.libcxx=libc++
 
 [options]
 

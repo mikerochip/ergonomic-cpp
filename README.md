@@ -80,14 +80,14 @@ Managing Python installations is a massive pain. We're going to do it right (i.e
 
 ## Conan
 
-Install Conan 1.49.0
+Install Conan
 
-1. ```pip install conan==1.49.0 --force-reinstall```
+1. ```pip install conan==1.58.0 --force-reinstall```
 2. ```pyenv rehash```
 
 ## PowerShell
 
-PowerShell 7.2 scripts are used for the BuildSystem
+PowerShell scripts are used for the BuildSystem
 
 The latest PowerShell is cross-platform and supports M1 ARM as of 7.2! Definitely becoming a fan of PowerShell instead of Bash or Bat, despite the extra install step.
 
@@ -168,3 +168,7 @@ Then re-run the build script.
 1. File > Settings > Build, Execution, and Deployment > Toolchains
 1. Click Visual Studio
 1. Click the up arrow button until Visual Studio becomes the first, default item
+
+**Error:** Compile error from a 
+
+**Suggestion:** Try running ```conan remove "*" -s -b -f``` followed by one of the build system scripts.

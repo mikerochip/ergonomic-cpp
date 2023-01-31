@@ -40,6 +40,6 @@ if ($IsWindows)
 }
 else
 {
-    cmake -S $ProjectPath -B . -G "Unix Makefiles"
+    cmake -S $ProjectPath -B . -G "Unix Makefiles" -DCMAKE_C_COMPILER_VERSION=13 -DCMAKE_CXX_COMPILER_VERSION=13
     make all
 }
