@@ -150,9 +150,9 @@ When using CLion, you'll have to hit the CMake and Conan reload buttons after pu
 
 **Suggestion:** Generally, your compiler changing (install, update, etc) will cause this error. This project relies on the CMake and Conan compiler defaults being the same.
 
-Run this:
+Try this:
 
-1. ```pip install conan --upgrade```
+1. Install Conan again, see steps above
 2. ```conan profile new default --detect --force```
 
 Then re-run the build script.
