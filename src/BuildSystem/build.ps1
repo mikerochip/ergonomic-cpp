@@ -32,7 +32,7 @@ Set-Location $BuildPath
 
 conan install $ProjectPath -pr="ergonomic-cpp-$BuildTypeLower" --build=missing
 
-$env:CMAKE_BUILD_TYPE = $BuildType
+$env:CMAKE_BUILD_TYPE="$BuildType"
 if ($IsWindows)
 {
     cmake -S $ProjectPath -B . -G "Visual Studio 16 2019" -A x64
@@ -40,6 +40,6 @@ if ($IsWindows)
 }
 else
 {
-    cmake -S $ProjectPath -B . -G "Unix Makefiles" -DCMAKE_C_COMPILER_VERSION=13 -DCMAKE_CXX_COMPILER_VERSION=13
+    cmake -S $ProjectPath -B . -G "Unix Makefiles"
     make all
 }
