@@ -169,6 +169,19 @@ Then re-run the build script.
 1. Click Visual Studio
 1. Click the up arrow button until Visual Studio becomes the first, default item
 
-**Error:** Compile error from a 
+**Error:** Compile error from a package dependency
 
-**Suggestion:** Try running ```conan remove "*" -s -b -f``` followed by one of the build system scripts.
+**Suggestion:** Try this
+
+1. Wipe out your caches
+   * Conan cache: `~/.conan`
+   * CMake cache: `<ProjectRoot>/build`
+1. Make sure your compilers are up to date, see instructions above
+1. Run the build script, see instructions above
+
+**Error:** CLion Conan plugin is missing
+
+**Suggestion:** CLion 2022.3 won't work with Conan plugin 1.2.0 per a [commit message](https://github.com/conan-io/conan-clion-plugin/commit/9844b05cc5d70a40b4f5c84450f98be6464e813b) on the repo:
+
+> **WARNING: This plugin has stopped working since CLion 2022.3. The team is currently focused on releasing Conan 2.0, so this will be on hold for a while,
+and work on this plugin will be resumed after 2.0 launch**
