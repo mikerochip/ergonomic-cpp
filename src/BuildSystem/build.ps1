@@ -33,15 +33,10 @@ Set-Location $BuildPath
 conan install $ProjectPath -pr="ergonomic-cpp-$BuildTypeLower" --build=missing
 
 # see https://docs.conan.io/2/examples/tools/cmake/cmake_toolchain/build_project_cmake_presets.html#building-the-project-using-cmakepresets
+# Ninja is a single-config generator, so the build type comes from CMAKE_BUILD_TYPE.
+# It's cross-platform, so Mac and Windows share the same generate/build commands.
+# On Windows you must run this from a Developer Command Prompt so Ninja can find cl.exe.
 $env:CMAKE_TOOLCHAIN_FILE="generators/conan_toolchain.cmake"
 $env:CMAKE_BUILD_TYPE="$BuildType"
-if ($IsWindows)
-{
-    cmake -S $ProjectPath -B . -G "Visual Studio 16 2019" -A x64
-    msbuild ErgonomicCpp.sln /p:Configuration=$BuildType
-}
-else
-{
-    cmake -S $ProjectPath -B . -G "Unix Makefiles"
-    make all
-}
+cmake -S $ProjectPath -B . -G "Ninja"
+ninja
