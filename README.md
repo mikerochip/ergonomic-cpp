@@ -67,12 +67,11 @@ With the following compilers / build systems
 
 ## uv
 
-Conan is a Python tool, but you don't need to manage Python yourself anymore. [uv](https://docs.astral.sh/uv/) installs Conan into its own isolated environment and downloads whatever Python it needs automatically.
+Conan is a Python tool. [uv](https://docs.astral.sh/uv/) installs Conan into an isolated environment and downloads whatever Python it needs automatically.
 
-1. Install uv
-   * Mac: ```brew install uv```
-   * Win: ```winget install --id=astral-sh.uv```
-   * Or follow https://docs.astral.sh/uv/getting-started/installation/
+* Mac: ```brew install uv```
+* Win: ```winget install --id=astral-sh.uv```
+* Or follow https://docs.astral.sh/uv/getting-started/installation/
 
 ## Conan
 
@@ -123,11 +122,11 @@ First ```cd src/BuildSystem``` then run any of these:
       1. You should see a default configuration called ```Debug```, select it and change these options
          * Build directory: ```build/Debug```
          * Generator: ```Ninja```
-         * CMake Options: ```-G "Ninja" -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES="conan_provider.cmake"```
+         * CMake Options: ```-G "Ninja" -DCONAN_COMMAND="~/.local/bin/conan" -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES="conan_provider.cmake"```
       2. Click the plus icon to add a new configuration, which should default to ```Release```
          * Build directory: ```build/Release```
          * Generator: ```Ninja```
-         * CMake Options: ```-G "Ninja" -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES="conan_provider.cmake"```
+         * CMake Options: ```-G "Ninja" -DCONAN_COMMAND="~/.local/bin/conan" -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES="conan_provider.cmake"```
 5. Open the Conan window
    1. Click the gear button `Configure Conan`
       * Check `Use Conan installed in the system`
@@ -139,6 +138,17 @@ First ```cd src/BuildSystem``` then run any of these:
    1. Click the Reload button
 
 # Troubleshooting
+
+**Error:** When reloading CMake in CLion ```CMake Error at conan_provider.cmake (find_program): Could not find CONAN_COMMAND using the following names: conan``` (usually followed by `find_package` errors for CLI11, fmt, Poco, etc.)
+
+**Suggestion:** CLion can't find the `conan` binary on its PATH. `uv tool install conan` puts `conan` in `~/.local/bin`, but a GUI-launched CLion on macOS does *not* reliably inherit that PATH — apps launched from Finder/Spotlight/Dock get their environment from `launchd` (often an empty PATH), not from your shell. So `find_program(CONAN_COMMAND "conan")` fails inside CLion even though `conan` works fine in your terminal.
+
+Double check `Settings > Build, Execution, Deployment > CMake`, for Debug *and* Release, ensure this is present, then reload CMake:
+   * ```-DCONAN_COMMAND=~/.local/bin/conan```
+
+Notes:
+* A single failing profile can mask a working one. `find_program` caches its result, so an old profile may keep working off a previously cached `CONAN_COMMAND` while a freshly-configured profile reports `CONAN_COMMAND-NOTFOUND`. Setting the option above fixes all profiles deterministically.
+* Putting `export PATH="$HOME/.local/bin:$PATH"` in `~/.zprofile` only helps if you actually launch CLion from a login shell (e.g. `clion .` from a terminal). It is **not** dependable for Dock/Spotlight/Toolbox launches, so prefer the `-DCONAN_COMMAND` option above.
 
 **Error:** When running the build script ```Detected a mismatch for the compiler version between your conan profile settings and CMake```
 
