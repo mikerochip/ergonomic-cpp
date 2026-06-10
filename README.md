@@ -5,6 +5,7 @@ This is a proof of concept for a more ergonomic, cross-platform C++ dev workflow
 * [CMake](https://cmake.org/) build system generator
 * [Ninja](https://ninja-build.org/) build system
 * [Conan](https://conan.io/) package manager
+* [uv](https://docs.astral.sh/uv/) to install and run Conan (manages Python for you)
 * [PowerShell](https://github.com/PowerShell/PowerShell) for build scripting
 * [CLion](https://www.jetbrains.com/clion/) as the default IDE
 * [fmt](https://github.com/fmtlib/fmt) for string formatting
@@ -64,33 +65,23 @@ With the following compilers / build systems
 * Mac: ```brew install ninja```
 * Win: ```winget install Ninja-build.Ninja```
 
-## Python
+## uv
 
-Python is a dependency for Conan
+Conan is a Python tool, but you don't need to manage Python yourself anymore. [uv](https://docs.astral.sh/uv/) installs Conan into its own isolated environment and downloads whatever Python it needs automatically.
 
-The goal is to install Python 3.9.6, however...
-
-Managing Python installations is a massive pain. We're going to do it right (i.e. version pinning) rather than depending on whatever Python version happens to be installed on your system.
-
-1. First install pyenv, which will manage Python versions
-   * Mac: https://github.com/pyenv/pyenv#homebrew-in-macos
-      * Make sure your OS is Catalina or higher
-      * Follow the ```For Zsh``` instructions
-   * Win: https://github.com/pyenv-win/pyenv-win#installation
-      * PowerShell is the easiest installation option
-2. Now open a command prompt to install Python via pyenv
-3. ```pyenv install 3.9.6```
-4. ```pyenv global 3.9.6```
-5. ```python -m pip install pip --upgrade```
-6. This isn't strictly needed, but you might as well install Pipenv. If you ever plan on working on Python projects, you'll want to use Pipenv to version-lock Python and packages.
-   * ```python -m pip install --user pipenv```
+1. Install uv
+   * Mac: ```brew install uv```
+   * Win: ```winget install --id=astral-sh.uv```
+   * Or follow https://docs.astral.sh/uv/getting-started/installation/
 
 ## Conan
 
-Install Conan 2
+Install Conan 2 as a uv tool. This puts ```conan``` on your PATH without touching any system Python.
 
-1. ```pip install conan==2.2.2 --force-reinstall```
-2. ```pyenv rehash```
+1. ```uv tool install conan```
+2. Verify with ```conan --version```
+
+To upgrade Conan later, run ```uv tool upgrade conan```
 
 ## PowerShell
 
@@ -155,8 +146,8 @@ First ```cd src/BuildSystem``` then run any of these:
 
 Try this:
 
-1. Install Conan again, see steps above
-2. ```conan profile new default --detect --force```
+1. Reinstall Conan with ```uv tool install conan --reinstall```
+2. ```conan profile detect --force```
 
 Then re-run the build script.
 
