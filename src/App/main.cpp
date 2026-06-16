@@ -1,10 +1,9 @@
 #include <string>
 #include "CLI/CLI.hpp"
 #include "fmt/core.h"
+#include "openssl/md5.h"
 #include "MyApp/Foo.h"
 #include "MyLibrary/Foo.h"
-#include "Poco/MD5Engine.h"
-#include "Poco/DigestStream.h"
 
 using namespace fmt;
 using namespace std;
@@ -13,7 +12,7 @@ using namespace std;
 #define ERGONOMIC_CPP_APP_VERSION "1.0.0"
 
 void BuildCommandParser(CLI::App& app);
-string GeneratePocoMd5Hex();
+string GenerateMd5Hex();
 
 int main(int argc, char** argv)
 {
@@ -25,8 +24,8 @@ int main(int argc, char** argv)
     MyLibrary::Foo myLibraryFoo;
     print("MyLibrary::Foo={}\n", myLibraryFoo.GenerateNumber());
 
-    string md5Hex = GeneratePocoMd5Hex();
-    print("Poco::MD5::Hex={}\n", md5Hex);
+    string md5Hex = GenerateMd5Hex();
+    print("MD5::Hex={}\n", md5Hex);
 
     CLI::App app;
     BuildCommandParser(app);
@@ -56,11 +55,14 @@ void BuildCommandParser(CLI::App& app)
     app.add_flag("--flag", flag, "Some flag that can be passed multiple times");
 }
 
-string GeneratePocoMd5Hex()
+string GenerateMd5Hex()
 {
-    Poco::MD5Engine md5;
-    Poco::DigestOutputStream ds(md5);
-    ds << "abcdefghijklmnopqrstuvwxyz";
-    ds.close();
-    return Poco::DigestEngine::digestToHex(md5.digest());
+    const string input = "abcdefghijklmnopqrstuvwxyz";
+    unsigned char digest[MD5_DIGEST_LENGTH];
+    MD5(reinterpret_cast<const unsigned char*>(input.data()), input.size(), digest);
+
+    string hex;
+    for (unsigned char byte : digest)
+        hex += fmt::format("{:02x}", byte);
+    return hex;
 }

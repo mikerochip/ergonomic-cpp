@@ -1,0 +1,10 @@
+# Project view for the CLion / IntelliJ Bazel plugin.
+# https://ij.bazel.build/docs/project-views.html
+
+directories:
+  src
+
+derive_targets_from_directories: true
+
+targets:
+  //src/App:ErgonomicCpp

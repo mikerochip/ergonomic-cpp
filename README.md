@@ -2,190 +2,159 @@
 
 This is a proof of concept for a more ergonomic, cross-platform C++ dev workflow using
 
-* [CMake](https://cmake.org/) build system generator
-* [Ninja](https://ninja-build.org/) build system
-* [Conan](https://conan.io/) package manager
-* [uv](https://docs.astral.sh/uv/) to install and run Conan (manages Python for you)
-* [PowerShell](https://github.com/PowerShell/PowerShell) for build scripting
-* [CLion](https://www.jetbrains.com/clion/) as the default IDE
-* [fmt](https://github.com/fmtlib/fmt) for string formatting
-* [CLI11](https://github.com/CLIUtils/CLI11) for command line parsing
+* [Bazel](https://bazel.build/) build system and package management
+* [Bazelisk](https://github.com/bazelbuild/bazelisk) pin Bazel versions
+* [Bzlmod](https://bazel.build/external/module) + [Bazel Central Registry](https://registry.bazel.build/) for dependency management
+* [CLion](https://www.jetbrains.com/clion/) default IDE
+* [fmt](https://github.com/fmtlib/fmt) string formatting
+* [CLI11](https://github.com/CLIUtils/CLI11) command line parsing
+* [BoringSSL](https://github.com/google/boringssl) just an example dependency
 
-With the following compilers / build systems
+With the following compilers
 
-* Mac: Apple Clang / Ninja
-* Windows: Visual Studio 2019 (MSVC 16) / Ninja
+* macOS: Apple Clang
+* Windows: MSVC
+
+Dependencies are specified in Bazel modules that point to the Bazel Central Registry.
+No per-platform configuration: just use `bazel build` and `bazel run`
+
+# Project Layout
+
+| Path | Purpose |
+|------|------------|
+| [`MODULE.bazel`](MODULE.bazel) | Bzlmod dependency declarations (`fmt`, `cli11`, `boringssl`, `rules_cc`) |
+| [`.bazelversion`](.bazelversion) | Bazel version used by Bazelisk |
+| [`.bazelrc`](.bazelrc) | Build flags |
+| `src/Libraries/MyLibrary/BUILD.bazel` | `cc_library` example |
+| `src/App/BUILD.bazel` | `cc_binary` that links the library + external deps |
 
 # Install Requirements
 
-*NOTE: Most tools (except MSVC on Windows) are going to be installed via command prompt and added to your PATH, so make sure to close and reopen all command prompts between steps.*
+## C++ Compilers
 
-## Mac C++ Tools
+> [!WARNING]
+> If this step is skipped, Bazel will fail at build time with a compiler-not-found error.
 
-### Homebrew
+### Mac: Apple Clang
 
-1. Go to https://brew.sh/
-2. Follow the installation instructions
+1. Install [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
+2. Open a terminal
+3. Run `xcode-select --install` - this ensures you get Apple Clang + Platform SDKs
 
-*NOTE: Homebrew will install Xcode CLI tools these days, but that's not a guarantee*
+### Windows: MSVC
 
-### Xcode
-
-[Download Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12) from the Mac App Store
-
-## Windows C++ Tools
-
-### Visual Studio 2019 (MSVC 16)
-
-1. Download the Visual Studio 2019 Build Tools installer with [this link](https://aka.ms/vs/16/release/vs_BuildTools.exe)
+1. Download the Visual Studio 2022 Build Tools installer with [this link](https://aka.ms/vs/17/release/vs_BuildTools.exe)
 2. Run the installer
 3. Check the Desktop development with C++ workload
    * This is a giant download, just to warn you (~5gb)
 4. Click Install
 
-### Developer Command Prompt
+#### Developer Command Prompt
+
+Windows needs Developer Command Prompts for the added MSVC env vars.
 
 1. Open your Windows search box and type "Developer PowerShell"
-2. Right-click the "Developer PowerShell for VS 2019" result
+2. Right-click the "Developer PowerShell for VS 2022" result
 3. Choose Pin to Taskbar
 
-### ⚠ **Warning** ⚠
+## Bazelisk
 
-* **You need to use a Developer Command Prompt when working with this project**
-* You can't open just any command prompt to access MSVC's C++ tools. You need a Developer Command Prompt for the specific version of VS you install. The reason for this is that a bunch of env vars are added to the command prompt on launch, and the vars are specific to each MSVC version, so they'd be absent or have version conflicts otherwise.
-* As of this writing (Mar 13 2022), Visual Studio 2022 (MSVC 17) doesn't work. A dependency of POCO, OpenSSL (specifically openssl/1.1.1l) doesn't have prebuilt binaries for MSVC 17, and building it from source fails because: (A) its Conan recipe uses NMake and (B) there's a (Conan?) bug where it picks the x86 version of NMake even though the target arch is x86_64.
+Bazelisk is a launcher that downloads and runs the exact Bazel version pinned in
+[`.bazelversion`](.bazelversion). Even though you're using bazelisk, you invoke it
+with the plain `bazel` command and let it do its version checks.
 
-## CMake
+* **macOS:** `brew install bazelisk`
+* **Windows:** `winget install Bazel.Bazelisk`
 
-* Mac: ```brew install cmake```
-* Win: ```winget install cmake```
+# CLion Setup
 
-## Ninja
+CLion builds this project through the Bazel plugin.
 
-* Mac: ```brew install ninja```
-* Win: ```winget install Ninja-build.Ninja```
-
-## uv
-
-Conan is a Python tool. [uv](https://docs.astral.sh/uv/) installs Conan into an isolated environment and downloads whatever Python it needs automatically.
-
-* Mac: ```brew install uv```
-* Win: ```winget install --id=astral-sh.uv```
-* Or follow https://docs.astral.sh/uv/getting-started/installation/
-
-## Conan
-
-Install Conan 2 as a uv tool. This puts ```conan``` on your PATH without touching any system Python.
-
-1. ```uv tool install conan```
-2. Verify with ```conan --version```
-
-To upgrade Conan later, run ```uv tool upgrade conan```
-
-## PowerShell
-
-PowerShell scripts are used for the BuildSystem
-
-The latest PowerShell is cross-platform and supports M1 ARM as of 7.2! Definitely becoming a fan of PowerShell instead of Bash or Bat, despite the extra install step.
-
-* Open a command prompt
-* Mac: ```brew install powershell```
-* Win: ```winget install --id Microsoft.Powershell --source winget```
+1. Install the [Bazel plugin](https://plugins.jetbrains.com/plugin/9554-bazel-for-clion)
+   (Settings > Plugins > Marketplace > Bazel)
+2. Restart CLion
+3. File > Import Bazel Project
+4. Select this repository as the workspace
+5. Choose `Import project view file` and pick [`.bazelproject`](.bazelproject)
 
 # Building and Running
 
-Build and run scripts are in ```src/BuildSystem```
+## Terminal
 
-You pass the configuration as the first arg e.g. ```pwsh build.ps1 Debug``` or ```pwsh run.ps1 Release```
+```
+bazel build //src/App:ErgonomicCpp   # build
+bazel run   //src/App:ErgonomicCpp   # build (if needed) and run
+```
 
-Default configuration is ```Debug```
+The first build downloads the dependencies and may take a bit; subsequent builds are
+incremental and cached.
 
-## From a Command Prompt
+Build a release-optimized binary with:
 
-First ```cd src/BuildSystem``` then run any of these:
+```
+bazel build -c opt //src/App:ErgonomicCpp
+```
 
-```pwsh build.ps1 [Debug|Release]``` will run conan and cmake commands before compiling
+Build everything (library + app):
 
-```pwsh run.ps1 [Debug|Release]``` will invoke the build script if the build output dir doesn't exist, then run the executable
+```
+bazel build //...
+```
 
-## From CLion
+## CLion
 
-1. You'll need to run the build scripts in Debug and Release first
-   1. Open a command prompt at the project root, then...
-   2. ```cd src/BuildSystem```
-   3. ```pwsh build.ps1 Debug```
-   4. ```pwsh build.ps1 Release```
-2. Open CLion
-3. Install the plugin for [Conan](https://plugins.jetbrains.com/plugin/11956-conan)
-4. Preferences/Settings > Build, Execution, and Deployment
-   1. CMake
-      1. You should see a default configuration called ```Debug```, select it and change these options
-         * Build directory: ```build/Debug```
-         * Generator: ```Ninja```
-         * CMake Options: ```-G "Ninja" -DCONAN_COMMAND="~/.local/bin/conan" -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES="conan_provider.cmake"```
-      2. Click the plus icon to add a new configuration, which should default to ```Release```
-         * Build directory: ```build/Release```
-         * Generator: ```Ninja```
-         * CMake Options: ```-G "Ninja" -DCONAN_COMMAND="~/.local/bin/conan" -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES="conan_provider.cmake"```
-5. Open the Conan window
-   1. Click the gear button `Configure Conan`
-      * Check `Use Conan installed in the system`
-      * Check `Automatically add Conan for all configurations`
-      * Check `Debug` and `Release` for `Use Conan for the following configurations`
-      * Check `Let Conan manage the Advanced Settings > Reload CMake profiles sequentially option`
-   2. Click the Reload button `Update packages and dependency provider`
-6. Open the CMake window
-   1. Click the Reload button
+`//src/App:ErgonomicCpp` should be a run/debug configuration after plugin setup
+
 
 # Troubleshooting
 
-**Error:** When reloading CMake in CLion ```CMake Error at conan_provider.cmake (find_program): Could not find CONAN_COMMAND using the following names: conan``` (usually followed by `find_package` errors for CLI11, fmt, Poco, etc.)
+**Error:** `bazel: command not found`
 
-**Suggestion:** CLion can't find the `conan` binary on its PATH. `uv tool install conan` puts `conan` in `~/.local/bin`, but a GUI-launched CLion on macOS does *not* reliably inherit that PATH — apps launched from Finder/Spotlight/Dock get their environment from `launchd` (often an empty PATH), not from your shell. So `find_program(CONAN_COMMAND "conan")` fails inside CLion even though `conan` works fine in your terminal.
+**Suggestion:** Install Bazelisk (see [Install Requirements](#bazelisk)). It provides
+the `bazel` command. Confirm with `bazel --version` (run inside the repo so it reads
+`.bazelversion`).
 
-Double check `Settings > Build, Execution, Deployment > CMake`, for Debug *and* Release, ensure this is present, then reload CMake:
-   * ```-DCONAN_COMMAND=~/.local/bin/conan```
+---
 
-Notes:
-* A single failing profile can mask a working one. `find_program` caches its result, so an old profile may keep working off a previously cached `CONAN_COMMAND` while a freshly-configured profile reports `CONAN_COMMAND-NOTFOUND`. Setting the option above fixes all profiles deterministically.
-* Putting `export PATH="$HOME/.local/bin:$PATH"` in `~/.zprofile` only helps if you actually launch CLion from a login shell (e.g. `clion .` from a terminal). It is **not** dependable for Dock/Spotlight/Toolbox launches, so prefer the `-DCONAN_COMMAND` option above.
+**Error:** A dependency's `BUILD` file fails with *"This rule has been removed from
+Bazel. Please add a `load()` statement"* (e.g. for `cc_library`).
 
-**Error:** When running the build script ```Detected a mismatch for the compiler version between your conan profile settings and CMake```
+**Suggestion:** This happens when Bazel resolves to **9.x**, which removed the
+built-in `cc_*` rules that older registry modules still use. The project pins **8.x**
+in [`.bazelversion`](.bazelversion) for exactly this reason. Make sure you are
+launching through Bazelisk (so the pin is honored) rather than a separately installed
+`bazel`.
 
-**Suggestion:** Generally, your compiler changing (install, update, etc.) will cause this error. This project relies on the CMake and Conan compiler defaults being the same.
+---
 
-Try this:
+**Error:** Stale or corrupted build state after changing dependencies.
 
-1. Reinstall Conan with ```uv tool install conan --reinstall```
-2. ```conan profile detect --force```
+**Suggestion:** Clear Bazel's state and rebuild:
 
-Then re-run the build script.
+```
+bazel clean --expunge
+bazel build //src/App:ErgonomicCpp
+```
 
-**Error:** ```ERROR: Invalid setting 'x.x' is not a valid 'settings.compiler.version' value.```
+# Uninstalling
 
-**Suggestion:** If you're on Mac and you get this error then probably Conan itself has not been updated to support the latest compiler version from the XCode CLI tools, which presumably you just downloaded. The workaround for this, which admittedly sucks pretty bad, is to add the new version to your ```~/.conan2/settings.yml``` manually in the ```apple-clang/version``` array.
+## Mac
 
-**Error:** [Windows] CLion syntax highlighting is broken (can't find standard library headers, incorrect warnings for Conan package includes, etc.) and debugging doesn't work.
+```
+brew uninstall bazelisk
+rm -rf ~/.cache/bazelisk            # Bazel binaries downloaded by Bazelisk
+rm -rf "/var/tmp/_bazel_$(whoami)"  # Bazel install, build output, and repo cache
+rm -f bazel-*                       # convenience symlinks in the project root
+```
 
-**Suggestion:** Most likely your default toolchain is set to MinGW, which seems to be straight up broke on Windows. Setting it to Visual Studio should fix this.
+## Windows
 
-1. File > Settings > Build, Execution, and Deployment > Toolchains
-2. Click Visual Studio
-3. Click the up arrow button until Visual Studio becomes the first, default item
+```
+winget uninstall Bazel.Bazelisk
+rmdir /s /q "%USERPROFILE%\.cache\bazelisk"  # Bazel binaries downloaded by Bazelisk
+del bazel-*                                  # convenience symlinks in the project root
+```
 
-**Error:** Compile error from a package dependency
-
-**Suggestion:** Try this
-
-1. Wipe out your caches
-   * Conan cache: `~/.conan2`
-   * CMake cache: `<ProjectRoot>/build`
-2. Make sure your compilers are up-to-date, see instructions above
-3. Run the build script, see instructions above
-
-**Error:** CLion Conan plugin is missing
-
-**Suggestion:** CLion 2022.3 won't work with Conan plugin 1.2.0 per a [commit message](https://github.com/conan-io/conan-clion-plugin/commit/9844b05cc5d70a40b4f5c84450f98be6464e813b) on the repo:
-
-> **WARNING: This plugin has stopped working since CLion 2022.3. The team is currently focused on releasing Conan 2.0, so this will be on hold for a while,
-and work on this plugin will be resumed after 2.0 launch**
+Bazel's build output/cache on Windows lives under a temp dir (often
+`C:\users\<user>\_bazel_<user>` or `%TEMP%`). Run `bazel info output_base` to see the
+exact path before uninstalling.

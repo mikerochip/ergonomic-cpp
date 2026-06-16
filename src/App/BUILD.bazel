@@ -1,0 +1,16 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+
+cc_binary(
+    name = "ErgonomicCpp",
+    srcs = [
+        "main.cpp",
+        "MyApp/Foo.cpp",
+        "MyApp/Foo.h",
+    ],
+    deps = [
+        "//src/Libraries/MyLibrary",
+        "@boringssl//:crypto",
+        "@cli11//:cli11",
+        "@fmt//:fmt",
+    ],
+)

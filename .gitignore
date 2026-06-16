@@ -14,12 +14,8 @@
 .idea
 *.DotSettings.user
 
-# CLion
-cmake-build*
-
-# CMake
-/build*/
-CMakeUserPresets.json
-
-# CLion Conan plugin
-conan_provider.cmake
+# Bazel
+/bazel-*
+# CLion Bazel plugin
+/.ijwb
+/.clwb

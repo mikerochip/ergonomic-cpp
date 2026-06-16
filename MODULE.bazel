@@ -1,0 +1,17 @@
+module(
+    name = "ergonomic_cpp",
+    version = "1.0.0",
+)
+
+# External dependencies (previously provided by Conan in conanfile.txt).
+#   fmt   10.2.1 -> 10.2.1.bcr.1
+#   cli11 2.4.1  -> 2.4.2  (2.4.1 not in BCR)
+# BoringSSL provides MD5 via the OpenSSL-compatible <openssl/md5.h> API. It
+# replaces Poco from the original project: it's a normal multi-platform BCR
+# module, so the build stays cross-platform with no per-OS BUILD logic.
+bazel_dep(name = "fmt", version = "10.2.1.bcr.1")
+bazel_dep(name = "cli11", version = "2.4.2")
+bazel_dep(name = "boringssl", version = "0.20260526.0")
+
+# cc_binary / cc_library are no longer built in to Bazel 9; load them from rules_cc.
+bazel_dep(name = "rules_cc", version = "0.2.0")
