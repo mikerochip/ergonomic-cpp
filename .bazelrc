@@ -1,2 +1,9 @@
 build --cxxopt=-std=c++17
 build --host_cxxopt=-std=c++17
+
+# Use a fixed PATH (and a stripped client env) for action cache keys. Without
+# this, the PATH leaks into every action's key, so builds launched from CLion
+# (a GUI app with a different PATH than your shell) miss the cache the terminal
+# populated and rebuild everything from scratch, and vice versa. With it, the
+# terminal and CLion produce identical keys and share one warm cache.
+build --incompatible_strict_action_env
