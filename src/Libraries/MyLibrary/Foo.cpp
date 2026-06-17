@@ -1,9 +1,7 @@
 
 #include "Foo.h"
 
-using namespace MyLibrary;
-
-int Foo::GenerateNumber() const
+int MyLibrary::Foo::GenerateNumber()
 {
     return 1;
 }

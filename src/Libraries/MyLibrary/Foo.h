@@ -6,6 +6,6 @@ namespace MyLibrary
     class Foo
     {
     public:
-        int GenerateNumber() const;
+        static int GenerateNumber();
     };
 }

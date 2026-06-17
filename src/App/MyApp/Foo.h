@@ -6,6 +6,6 @@ namespace MyApp
     class Foo
     {
     public:
-        int GenerateNumber() const;
+        [[nodiscard]] int GenerateNumber() const;
     };
 }

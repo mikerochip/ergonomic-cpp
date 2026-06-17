@@ -24,7 +24,8 @@ Checks: >
   -hicpp-braces-around-statements,
   -google-readability-braces-around-statements,
   -cppcoreguidelines-non-private-member-variables-in-classes,
-  -misc-non-private-member-variables-in-classes
+  -misc-non-private-member-variables-in-classes,
+  -portability-avoid-pragma-once
 
 WarningsAsErrors: ''
 HeaderFilterRegex: '.*'

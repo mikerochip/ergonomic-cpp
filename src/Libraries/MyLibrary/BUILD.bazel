@@ -4,8 +4,6 @@ cc_library(
     name = "MyLibrary",
     srcs = ["Foo.cpp"],
     hdrs = ["Foo.h"],
-    # Mirror CMake's include_directories(src/Libraries): consumers include
-    # "MyLibrary/Foo.h".
     include_prefix = "MyLibrary",
     visibility = ["//visibility:public"],
 )

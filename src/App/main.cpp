@@ -1,3 +1,5 @@
+#include <array>
+#include <exception>
 #include <string>
 #include "CLI/CLI.hpp"
 #include "fmt/core.h"
@@ -5,24 +7,42 @@
 #include "MyApp/Foo.h"
 #include "MyLibrary/Foo.h"
 
-using namespace fmt;
-using namespace std;
+using fmt::print;
+using std::string;
 
-#define ERGONOMIC_CPP_APP_NAME "1.0.0"
-#define ERGONOMIC_CPP_APP_VERSION "1.0.0"
+constexpr auto* AppName = "1.0.0";
+constexpr auto* AppVersion = "1.0.0";
 
-void BuildCommandParser(CLI::App& app);
-string GenerateMd5Hex();
+namespace
+{
+    int Run(int argc, char* const* argv);
+    void BuildCommandParser(CLI::App& app);
+    string GenerateMd5Hex();
+}  // namespace
 
-int main(int argc, char** argv)
+int main(const int argc, char* const* argv)
+{
+    try
+    {
+        return Run(argc, argv);
+    }
+    catch (const std::exception& e)
+    {
+        print("Error: {}\n", e.what());
+        return 1;
+    }
+}
+
+namespace
+{
+int Run(const int argc, char* const* argv)
 {
     print("Hello, World!\n");
 
-    MyApp::Foo myAppFoo;
+    constexpr MyApp::Foo myAppFoo;
     print("MyApp::Foo={}\n", myAppFoo.GenerateNumber());
 
-    MyLibrary::Foo myLibraryFoo;
-    print("MyLibrary::Foo={}\n", myLibraryFoo.GenerateNumber());
+    print("MyLibrary::Foo={}\n", MyLibrary::Foo::GenerateNumber());
 
     string md5Hex = GenerateMd5Hex();
     print("MD5::Hex={}\n", md5Hex);
@@ -35,13 +55,14 @@ int main(int argc, char** argv)
     print("CLI::App::Options={}\n", options.size());
     for (auto&& option : options)
         print("{}\n", option->get_name());
+
     return 0;
 }
 
 void BuildCommandParser(CLI::App& app)
 {
-    app.name(ERGONOMIC_CPP_APP_NAME);
-    app.set_version_flag("--version", ERGONOMIC_CPP_APP_VERSION);
+    app.name(AppName);
+    app.set_version_flag("--version", AppVersion);
     app.allow_extras(true);
 
     int count = 0;
@@ -58,11 +79,13 @@ void BuildCommandParser(CLI::App& app)
 string GenerateMd5Hex()
 {
     const string input = "abcdefghijklmnopqrstuvwxyz";
-    unsigned char digest[MD5_DIGEST_LENGTH];
-    MD5(reinterpret_cast<const unsigned char*>(input.data()), input.size(), digest);
+    std::array<unsigned char, MD5_DIGEST_LENGTH> digest{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast) -- bridge std::string's char data to the C MD5 API
+    MD5(reinterpret_cast<const unsigned char*>(input.data()), input.size(), digest.data());
 
     string hex;
     for (unsigned char byte : digest)
         hex += fmt::format("{:02x}", byte);
     return hex;
 }
+}  // namespace
