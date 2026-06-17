@@ -31,6 +31,12 @@ indent_style = tab
 indent_style = space
 indent_size = 2
 
+# Bazel/Starlark files
+[{BUILD,BUILD.bazel,WORKSPACE,WORKSPACE.bazel,MODULE.bazel,*.bzl,*.bazel,.bazelrc}]
+charset = utf-8
+indent_style = space
+indent_size = 4
+
 [{package.json,.travis.yml}]
 indent_style = space
 indent_size = 2

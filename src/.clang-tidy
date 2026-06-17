@@ -1,0 +1,31 @@
+# clang-tidy configuration for this project.
+#
+# Strategy: start from nothing (-*), enable whole high-value check families,
+# then disable the handful of individual checks that are too noisy or that
+# clash with this codebase's conventions. Prefer toggling a family here over
+# enumerating every check by hand.
+---
+Checks: >
+  -*,
+  bugprone-*,
+  cert-*,
+  cppcoreguidelines-*,
+  google-*,
+  hicpp-*,
+  misc-*,
+  modernize-*,
+  performance-*,
+  portability-*,
+  readability-*,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -readability-magic-numbers,
+  -modernize-use-trailing-return-type,
+  -readability-braces-around-statements,
+  -hicpp-braces-around-statements,
+  -google-readability-braces-around-statements,
+  -cppcoreguidelines-non-private-member-variables-in-classes,
+  -misc-non-private-member-variables-in-classes
+
+WarningsAsErrors: ''
+HeaderFilterRegex: '.*'
+FormatStyle: file
